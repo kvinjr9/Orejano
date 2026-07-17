@@ -1,8 +1,9 @@
 # El Orejano — Sitio estático
 
-Pequeña página estática del asadero y restaurante *El Orejano*. Contiene el menú y estilos.
+Pequeña página estática del asadero y restaurante _El Orejano_. Contiene el menú y estilos.
 
 ## Archivos principales
+
 - `index.html`: página principal y hoja de estilos embebida.
 
 ## Cómo ver el sitio
@@ -35,4 +36,5 @@ python -m http.server 8000
 - Convertir los estilos inline a `styles.css` si prefieres separar recursos.
 
 ---
+
 Si quieres, puedo añadir una versión con `styles.css` y `app.js` separados o mejorar la animación del menú.
