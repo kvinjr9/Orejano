@@ -20,6 +20,12 @@
         --brass: #a9822e;
         --brass-light: #d9b75c;
         --line: rgba(36, 20, 8, 0.18);
+        --ink-soft: rgba(36, 20, 8, 0.72);
+        --ink-faint: rgba(36, 20, 8, 0.62);
+        --cream-soft: rgba(242, 232, 212, 0.85);
+        --hide-soft: rgba(232, 220, 190, 0.82);
+        --hide-faint: rgba(232, 220, 190, 0.5);
+        --hide-hair: rgba(232, 220, 190, 0.15);
       }
 
       * {
@@ -90,8 +96,9 @@
         max-width: 1180px;
         margin: 0 auto;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 18px;
+        gap: 6px 18px;
         padding: 10px 20px;
       }
       .topbar-logo {
@@ -109,13 +116,11 @@
       }
       .topbar-nav {
         display: flex;
+        flex-wrap: wrap;
+        flex-basis: 100%;
+        order: 3;
+        justify-content: center;
         gap: 2px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      .topbar-nav::-webkit-scrollbar {
-        display: none;
       }
       .navlink {
         font-size: 0.78rem;
@@ -139,6 +144,7 @@
       }
       .topbar-phone {
         margin-left: auto;
+        order: 2;
         flex: none;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.78rem;
@@ -288,7 +294,7 @@
         font-size: 1.05rem;
         max-width: 46ch;
         margin: 16px 0 26px;
-        color: rgba(242, 232, 212, 0.85);
+        color: var(--cream-soft);
       }
       .hero-meta {
         display: flex;
@@ -395,7 +401,7 @@
       .intro-card p {
         margin: 0;
         font-size: 0.88rem;
-        color: rgba(36, 20, 8, 0.72);
+        color: var(--ink-soft);
         line-height: 1.45;
       }
 
@@ -502,13 +508,26 @@
         margin: 4px 0 0;
         font-size: 0.82rem;
         font-style: italic;
-        color: rgba(36, 20, 8, 0.62);
+        color: var(--ink-faint);
         line-height: 1.4;
         max-width: 46ch;
       }
 
       #licores .dish-price {
         color: var(--brass);
+      }
+
+      .dish-photo {
+        display: block;
+        width: 100%;
+        aspect-ratio: 2 / 1;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background: var(--hide);
+      }
+      .dish-card {
+        padding-bottom: 18px;
       }
 
       /* ---------- FOOTER ---------- */
@@ -536,7 +555,7 @@
       .footer-inner a {
         font-size: 0.9rem;
         line-height: 1.7;
-        color: rgba(232, 220, 190, 0.82);
+        color: var(--hide-soft);
         text-decoration: none;
       }
       .footer-inner a:hover {
@@ -553,13 +572,20 @@
         max-width: 1080px;
         margin: 34px auto 0;
         padding-top: 20px;
-        border-top: 1px solid rgba(232, 220, 190, 0.15);
+        border-top: 1px solid var(--hide-hair);
         font-size: 0.76rem;
-        color: rgba(232, 220, 190, 0.5);
+        color: var(--hide-faint);
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 8px;
+      }
+
+      @media (max-width: 720px) {
+        .footer-inner {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
       }
     </style>
   </head>
@@ -711,7 +737,16 @@
               acompañado de patacón.
             </p>
           </div>
-          <div class="dish">
+          <div class="dish dish-card">
+            <img
+              class="dish-photo"
+              src="images/caldo-de-costilla.jpg"
+              alt="Caldo de costilla"
+              width="900"
+              height="506"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="dish-row">
               <span class="dish-name">Caldo de costilla</span>
               <span class="leader" aria-hidden="true"></span>
@@ -722,7 +757,16 @@
               acompañado de arepa antioqueña.
             </p>
           </div>
-          <div class="dish">
+          <div class="dish dish-card">
+            <img
+              class="dish-photo"
+              src="images/caldo-de-picado.jpg"
+              alt="Caldo de picado"
+              width="900"
+              height="506"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="dish-row">
               <span class="dish-name">Caldo de picado</span>
               <span class="leader" aria-hidden="true"></span>
@@ -906,7 +950,16 @@
             </div>
             <p class="dish-desc">Arepa de mazorca con jamón y queso.</p>
           </div>
-          <div class="dish">
+          <div class="dish dish-card">
+            <img
+              class="dish-photo"
+              src="images/envuelto-de-mazorca.jpg"
+              alt="Envuelto de mazorca"
+              width="900"
+              height="506"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="dish-row">
               <span class="dish-name">Envuelto de mazorca</span>
               <span class="leader" aria-hidden="true"></span>
@@ -914,7 +967,16 @@
             </div>
             <p class="dish-desc">Envuelto de mazorca con queso.</p>
           </div>
-          <div class="dish">
+          <div class="dish dish-card">
+            <img
+              class="dish-photo"
+              src="images/hayacas.jpg"
+              alt="Hayacas"
+              width="900"
+              height="506"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="dish-row">
               <span class="dish-name">Hayacas</span>
               <span class="leader" aria-hidden="true"></span>
@@ -1338,7 +1400,16 @@
             </div>
             <p class="dish-desc">1 arepa de yuca rellena de queso.</p>
           </div>
-          <div class="dish">
+          <div class="dish dish-card">
+            <img
+              class="dish-photo"
+              src="images/arepa-de-chocolo.jpg"
+              alt="Arepa de chocolo"
+              width="900"
+              height="506"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="dish-row">
               <span class="dish-name">Arepa de chocolo</span>
               <span class="leader" aria-hidden="true"></span>
@@ -1919,13 +1990,6 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Gaseosa 1.5</span>
-              <span class="leader" aria-hidden="true"></span>
-              <span class="dish-price">$ 12.000</span>
-            </div>
-          </div>
-          <div class="dish">
-            <div class="dish-row">
               <span class="dish-name">Sodas Italianas Frutales</span>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 12.000</span>
@@ -2083,7 +2147,7 @@
             <div class="dish-row">
               <span class="dish-name">Gaseosa Postobón 1,5L</span>
               <span class="leader" aria-hidden="true"></span>
-              <span class="dish-price">$ 10.000</span>
+              <span class="dish-price">$ 12.000</span>
             </div>
             <p class="dish-desc">Pepsi, colombiana, manzana, ginger.</p>
           </div>
