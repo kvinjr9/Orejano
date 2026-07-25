@@ -10,558 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Rye&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --cream: #f2e8d4;
-        --hide: #e8dcbe;
-        --leather: #4a2e18;
-        --espresso: #241408;
-        --ember: #b8422a;
-        --brass: #a9822e;
-        --brass-light: #d9b75c;
-        --line: rgba(36, 20, 8, 0.18);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        background: var(--cream);
-        color: var(--espresso);
-        font-family: "Karla", sans-serif;
-        -webkit-font-smoothing: antialiased;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation-duration: 0.001ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.001ms !important;
-          scroll-behavior: auto !important;
-        }
-      }
-
-      h1,
-      h2,
-      .brand-word {
-        font-family: "Rye", cursive;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-      }
-
-      a {
-        color: inherit;
-      }
-      :focus-visible {
-        outline: 3px solid var(--ember);
-        outline-offset: 3px;
-      }
-
-      /* background texture: subtle hide grain */
-      .grain {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.05;
-        background-image:
-          radial-gradient(circle at 20% 30%, #000 0, transparent 1px),
-          radial-gradient(circle at 70% 60%, #000 0, transparent 1px),
-          radial-gradient(circle at 45% 80%, #000 0, transparent 1px);
-        background-size:
-          140px 140px,
-          90px 90px,
-          160px 160px;
-      }
-
-      /* ---------- TOP BAR ---------- */
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: var(--leather);
-        color: var(--cream);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-      }
-      .topbar-inner {
-        max-width: 1180px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        padding: 10px 20px;
-      }
-      .topbar-logo {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        flex: none;
-        border: 2px solid var(--brass-light);
-      }
-      .topbar-name {
-        font-family: "Rye", cursive;
-        font-size: 1.05rem;
-        letter-spacing: 0.03em;
-        white-space: nowrap;
-      }
-      .topbar-nav {
-        display: flex;
-        gap: 2px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      .topbar-nav::-webkit-scrollbar {
-        display: none;
-      }
-      .navlink {
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        text-decoration: none;
-        white-space: nowrap;
-        padding: 8px 12px;
-        border-radius: 999px;
-        color: var(--hide);
-        opacity: 0.85;
-        transition:
-          background 0.2s,
-          opacity 0.2s,
-          color 0.2s;
-      }
-      .navlink:hover {
-        background: rgba(217, 183, 92, 0.18);
-        opacity: 1;
-        color: var(--brass-light);
-      }
-      .topbar-phone {
-        margin-left: auto;
-        flex: none;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.78rem;
-        color: var(--brass-light);
-        text-decoration: none;
-        white-space: nowrap;
-      }
-
-      /* Mobile toggle button for topbar */
-      .topbar-toggle {
-        display: none;
-        background: transparent;
-        border: none;
-        color: var(--cream);
-        padding: 8px;
-        margin-right: 6px;
-        cursor: pointer;
-      }
-      .topbar-toggle svg {
-        width: 22px;
-        height: 22px;
-        display: block;
-      }
-
-      @media (max-width: 720px) {
-        .topbar-toggle {
-          display: block;
-        }
-        .topbar-inner {
-          position: relative;
-        }
-        /* mobile nav as an absolute panel below the header */
-        .topbar-nav {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 100%;
-          background: linear-gradient(
-            180deg,
-            rgba(36, 20, 8, 0.95),
-            rgba(36, 20, 8, 0.98)
-          );
-          padding: 8px 16px 12px;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-          border-bottom-left-radius: 8px;
-          border-bottom-right-radius: 8px;
-          overflow: hidden;
-          max-height: 0;
-          opacity: 0;
-          transform-origin: top;
-          transition:
-            max-height 320ms ease,
-            opacity 220ms ease,
-            transform 220ms ease;
-          z-index: 60;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-        /* when open, expand panel */
-        .topbar.open .topbar-nav {
-          max-height: 420px; /* adjust if many links */
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .topbar-nav .navlink {
-          display: block;
-          width: 100%;
-          text-align: left;
-          padding: 10px 12px;
-          margin: 0;
-          border-radius: 8px;
-          background: transparent;
-          color: var(--hide);
-        }
-        .topbar-nav .navlink:hover {
-          background: rgba(217, 183, 92, 0.12);
-          color: var(--brass-light);
-        }
-      }
-
-      /* ---------- HERO ---------- */
-      .hero {
-        position: relative;
-        overflow: hidden;
-        background:
-          radial-gradient(
-            1100px 500px at 80% -10%,
-            rgba(184, 66, 42, 0.25),
-            transparent 60%
-          ),
-          linear-gradient(180deg, var(--espresso) 0%, var(--leather) 100%);
-        color: var(--cream);
-        padding: 72px 20px 60px;
-      }
-      .hero-inner {
-        max-width: 1080px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 40px;
-        align-items: center;
-      }
-      .hero-emblem {
-        width: 190px;
-        height: 190px;
-        border-radius: 50%;
-        border: 3px solid var(--brass-light);
-        box-shadow:
-          0 0 0 8px rgba(0, 0, 0, 0.25),
-          0 20px 40px rgba(0, 0, 0, 0.45);
-        animation: brand-stamp 1000ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
-        filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
-      }
-      @keyframes brand-stamp {
-        0% {
-          opacity: 0;
-          transform: scale(1.5) rotate(-8deg);
-          filter: brightness(2.4) blur(2px);
-        }
-        55% {
-          opacity: 1;
-          transform: scale(0.97) rotate(1deg);
-          filter: brightness(1.15) blur(0);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1) rotate(0);
-          filter: brightness(1) blur(0);
-        }
-      }
-      .hero-eyebrow {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.78rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--brass-light);
-        margin: 0 0 10px;
-      }
-      .hero h1 {
-        margin: 0;
-        font-size: clamp(2.6rem, 6vw, 4.6rem);
-        line-height: 1.02;
-        color: var(--cream);
-      }
-      .hero p.tag {
-        font-size: 1.05rem;
-        max-width: 46ch;
-        margin: 16px 0 26px;
-        color: rgba(242, 232, 212, 0.85);
-      }
-      .hero-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 22px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.82rem;
-        color: var(--brass-light);
-        margin-bottom: 26px;
-      }
-      .hero-meta span {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .cta-row {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        display: inline-block;
-        padding: 13px 26px;
-        border-radius: 4px;
-        font-family: "Karla", sans-serif;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        font-size: 0.82rem;
-        text-decoration: none;
-        transition:
-          transform 0.15s ease,
-          box-shadow 0.15s ease;
-      }
-      .btn:hover {
-        transform: translateY(-2px);
-      }
-      .btn-primary {
-        background: var(--ember);
-        color: #fff;
-        box-shadow: 0 8px 18px rgba(184, 66, 42, 0.35);
-      }
-      .btn-ghost {
-        border: 1px solid var(--brass-light);
-        color: var(--brass-light);
-      }
-
-      @media (max-width: 720px) {
-        .hero-inner {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-        .hero-emblem {
-          margin: 0 auto;
-          width: 140px;
-          height: 140px;
-        }
-        .hero-meta,
-        .cta-row {
-          justify-content: center;
-        }
-      }
-
-      /* ---------- INTRO STRIP ---------- */
-      .intro {
-        max-width: 1080px;
-        margin: -34px auto 0;
-        padding: 0 20px;
-        position: relative;
-        z-index: 2;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-      .intro-card {
-        background: var(--hide);
-        border: 1px solid var(--line);
-        border-radius: 6px;
-        padding: 22px 20px;
-        box-shadow: 0 12px 26px rgba(36, 20, 8, 0.14);
-      }
-      .intro-icon {
-        display: block;
-        width: 30px;
-        height: 30px;
-        color: var(--ember);
-        margin-bottom: 10px;
-      }
-      .intro-icon svg {
-        width: 100%;
-        height: 100%;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .intro-card h3 {
-        margin: 0 0 6px;
-        font-size: 1rem;
-        font-family: "Karla", sans-serif;
-        font-weight: 700;
-      }
-      .intro-card p {
-        margin: 0;
-        font-size: 0.88rem;
-        color: rgba(36, 20, 8, 0.72);
-        line-height: 1.45;
-      }
-
-      @media (max-width: 720px) {
-        .intro {
-          grid-template-columns: 1fr;
-          margin-top: -20px;
-        }
-      }
-
-      /* ---------- MENU SECTIONS ---------- */
-      .menu-wrap {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 70px 20px 20px;
-        position: relative;
-        z-index: 1;
-      }
-      .menu-section {
-        padding: 34px 0 46px;
-        scroll-margin-top: 84px;
-      }
-      .menu-section:not(:last-child) {
-        border-bottom: 1px dashed var(--line);
-      }
-
-      .section-head {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 26px;
-      }
-      .section-icon {
-        width: 30px;
-        height: 30px;
-        color: var(--brass);
-        flex: none;
-      }
-      .section-icon svg {
-        width: 100%;
-        height: 100%;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .section-head h2 {
-        font-size: 1.7rem;
-        margin: 0;
-        color: var(--leather);
-        white-space: nowrap;
-      }
-      .section-rule {
-        flex: 1;
-        height: 1px;
-        background: repeating-linear-gradient(
-          90deg,
-          var(--brass) 0 6px,
-          transparent 6px 12px
-        );
-        opacity: 0.6;
-      }
-
-      .dish-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px 40px;
-      }
-      @media (max-width: 720px) {
-        .dish-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .dish {
-        padding: 11px 0;
-        border-bottom: 1px solid var(--line);
-      }
-      .dish-row {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-      }
-      .dish-name {
-        font-weight: 700;
-        font-size: 0.95rem;
-        color: var(--espresso);
-      }
-      .leader {
-        flex: 1;
-        border-bottom: 1.5px dotted var(--brass);
-        transform: translateY(-3px);
-        min-width: 12px;
-      }
-      .dish-price {
-        font-family: "JetBrains Mono", monospace;
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--ember);
-        white-space: nowrap;
-      }
-      .dish-desc {
-        margin: 4px 0 0;
-        font-size: 0.82rem;
-        font-style: italic;
-        color: rgba(36, 20, 8, 0.62);
-        line-height: 1.4;
-        max-width: 46ch;
-      }
-
-      #licores .dish-price {
-        color: var(--brass);
-      }
-
-      /* ---------- FOOTER ---------- */
-      footer {
-        background: var(--espresso);
-        color: var(--hide);
-        padding: 54px 20px 30px;
-        margin-top: 20px;
-      }
-      .footer-inner {
-        max-width: 1080px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1.2fr 1fr 1fr;
-        gap: 36px;
-      }
-      .footer-inner h3 {
-        font-family: "Rye", cursive;
-        font-weight: 400;
-        font-size: 1.5rem;
-        color: var(--brass-light);
-        margin: 0 0 12px;
-      }
-      .footer-inner p,
-      .footer-inner a {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: rgba(232, 220, 190, 0.82);
-        text-decoration: none;
-      }
-      .footer-inner a:hover {
-        color: var(--brass-light);
-      }
-      .foot-logo {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: 2px solid var(--brass-light);
-        margin-bottom: 14px;
-      }
-      .fine {
-        max-width: 1080px;
-        margin: 34px auto 0;
-        padding-top: 20px;
-        border-top: 1px solid rgba(232, 220, 190, 0.15);
-        font-size: 0.76rem;
-        color: rgba(232, 220, 190, 0.5);
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="grain"></div>
@@ -702,7 +151,9 @@
         <div class="dish-grid">
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Caldo de pescado</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Caldo de pescado
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 25.000</span>
             </div>
@@ -710,10 +161,21 @@
               Caldo de pescado dorado, con papa blanca y papa criolla,
               acompañado de patacón.
             </p>
+            <img
+              class="dish-photo"
+              src="images/caldo-de-pescado.png"
+              alt="Caldo de pescado"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Caldo de costilla</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Caldo de costilla
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 15.000</span>
             </div>
@@ -721,10 +183,21 @@
               Caldo con costilla de res, con papa blanca y papa criolla,
               acompañado de arepa antioqueña.
             </p>
+            <img
+              class="dish-photo"
+              src="images/caldo-de-costilla.png"
+              alt="Caldo de costilla"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Caldo de picado</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Caldo de picado
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 15.000</span>
             </div>
@@ -732,6 +205,15 @@
               Caldo de picado (chunchulla, hígado, pajarilla y corazón)
               acompañado de arepa antioqueña.
             </p>
+            <img
+              class="dish-photo"
+              src="images/caldo-de-picado.png"
+              alt="Caldo de picado"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
@@ -908,19 +390,41 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Envuelto de mazorca</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Envuelto de mazorca
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 6.000</span>
             </div>
             <p class="dish-desc">Envuelto de mazorca con queso.</p>
+            <img
+              class="dish-photo"
+              src="images/envuelto-de-mazorca.png"
+              alt="Envuelto de mazorca"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Hayacas</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Hayacas
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 12.000</span>
             </div>
             <p class="dish-desc">Hayaca llanera con pollo, res y tocino.</p>
+            <img
+              class="dish-photo"
+              src="images/hayacas.png"
+              alt="Hayacas"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
@@ -1340,11 +844,22 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Arepa de chocolo</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Arepa de chocolo
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 12.000</span>
             </div>
             <p class="dish-desc">1 arepa de mazorca con queso.</p>
+            <img
+              class="dish-photo"
+              src="images/arepa-de-chocolo.png"
+              alt="Arepa de chocolo"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </section>
@@ -1711,7 +1226,9 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Bandeja paisa</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Bandeja paisa
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 48.000</span>
             </div>
@@ -1719,6 +1236,15 @@
               Arroz blanco, frijol, carne molida, huevo frito, chorizo, arepa
               antioqueña, aguacate y plátano maduro.
             </p>
+            <img
+              class="dish-photo"
+              src="images/bandeja-paisa.png"
+              alt="Bandeja paisa"
+              width="700"
+              height="401"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
@@ -1919,13 +1445,6 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Gaseosa 1.5</span>
-              <span class="leader" aria-hidden="true"></span>
-              <span class="dish-price">$ 12.000</span>
-            </div>
-          </div>
-          <div class="dish">
-            <div class="dish-row">
               <span class="dish-name">Sodas Italianas Frutales</span>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 12.000</span>
@@ -2083,7 +1602,7 @@
             <div class="dish-row">
               <span class="dish-name">Gaseosa Postobón 1,5L</span>
               <span class="leader" aria-hidden="true"></span>
-              <span class="dish-price">$ 10.000</span>
+              <span class="dish-price">$ 12.000</span>
             </div>
             <p class="dish-desc">Pepsi, colombiana, manzana, ginger.</p>
           </div>
@@ -2173,6 +1692,15 @@
           header.classList.remove("open");
           btn.setAttribute("aria-expanded", "false");
         }
+      });
+
+      document.querySelectorAll(".dish-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          var photo = toggle.closest(".dish").querySelector(".dish-photo");
+          if (!photo) return;
+          var isOpen = photo.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
       });
     });
   </script>
