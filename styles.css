@@ -521,7 +521,7 @@ a {
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--ember);
+  color: var(--leather);
   white-space: nowrap;
 }
 .dish-desc {
