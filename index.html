@@ -660,6 +660,15 @@
           <h2>Carnes típicas</h2>
           <span class="section-rule"></span>
         </div>
+        <img
+          class="section-photo"
+          src="images/plato-llanero.jpg"
+          alt="Plato llanero (la picada)"
+          width="700"
+          height="394"
+          loading="lazy"
+          decoding="async"
+        />
         <div class="dish-grid">
           <div class="dish">
             <div class="dish-row">
@@ -1285,7 +1294,9 @@
         <div class="dish-grid">
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Combo hamburguesa artesanal</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Combo hamburguesa artesanal
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 35.000</span>
             </div>
@@ -1293,6 +1304,15 @@
               Pan artesanal, carne 100% fresca hecha en casa, vegetales frescos,
               papas crujientes y gaseosa.
             </p>
+            <img
+              class="dish-photo"
+              src="images/combo-hamburguesa-artesanal.jpg"
+              alt="Combo hamburguesa artesanal"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
@@ -1318,13 +1338,24 @@
           </div>
           <div class="dish">
             <div class="dish-row">
-              <span class="dish-name">Combo salchipapa americana</span>
+              <button class="dish-name dish-toggle" aria-expanded="false">
+                Combo salchipapa americana
+              </button>
               <span class="leader" aria-hidden="true"></span>
               <span class="dish-price">$ 28.000</span>
             </div>
             <p class="dish-desc">
               Salchicha americana, papa a la francesa, queso y jamón.
             </p>
+            <img
+              class="dish-photo"
+              src="images/combo-salchipapa-americana.jpg"
+              alt="Combo salchipapa americana"
+              width="700"
+              height="394"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="dish">
             <div class="dish-row">
@@ -1665,6 +1696,26 @@
         <span>Acacías, Meta · Colombia</span>
       </div>
     </footer>
+
+    <aside class="hint-card" id="hintCard" role="status" aria-live="polite">
+      <button class="hint-close" type="button" aria-label="Cerrar aviso">
+        &times;
+      </button>
+      <p class="hint-title">🖼️ Imagen del producto</p>
+      <p class="hint-msg">
+        Recuerda que puedes mostrar u ocultar la imagen del producto cuando lo
+        necesites.
+      </p>
+    </aside>
+    <button
+      class="hint-tab"
+      id="hintTab"
+      type="button"
+      aria-label="Mostrar aviso de imagen del producto"
+      hidden
+    >
+      🖼️
+    </button>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -1702,6 +1753,38 @@
           toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
         });
       });
+
+      var hintCard = document.getElementById("hintCard");
+      var hintTab = document.getElementById("hintTab");
+      var hintClose = hintCard
+        ? hintCard.querySelector(".hint-close")
+        : null;
+      var hintTimer = null;
+
+      function openHint() {
+        if (!hintCard || !hintTab) return;
+        clearTimeout(hintTimer);
+        hintTab.classList.remove("is-visible");
+        hintTab.hidden = true;
+        hintCard.classList.add("is-open");
+        hintTimer = setTimeout(closeHint, 3500);
+      }
+
+      function closeHint() {
+        if (!hintCard || !hintTab) return;
+        clearTimeout(hintTimer);
+        hintCard.classList.remove("is-open");
+        hintTab.hidden = false;
+        requestAnimationFrame(function () {
+          hintTab.classList.add("is-visible");
+        });
+      }
+
+      if (hintCard && hintTab && hintClose) {
+        hintClose.addEventListener("click", closeHint);
+        hintTab.addEventListener("click", openHint);
+        openHint();
+      }
     });
   </script>
 </html>
