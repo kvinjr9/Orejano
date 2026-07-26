@@ -450,6 +450,7 @@ a {
 .section-photo {
   display: block;
   width: 100%;
+  height: auto;
   max-width: 560px;
   margin: 0 auto 30px;
   border-radius: 14px;
