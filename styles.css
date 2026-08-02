@@ -486,30 +486,31 @@ a {
   font-size: 0.95rem;
   color: var(--espresso);
 }
-.dish-toggle {
+.ver-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-}
-.dish-toggle::after {
-  content: "";
-  width: 0;
-  height: 0;
   flex: none;
-  border-left: 5px solid var(--brass);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  transition: transform 0.2s ease;
+  background: var(--brass);
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-family: "Karla", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
 }
-.dish-toggle[aria-expanded="true"]::after {
-  transform: rotate(90deg);
+.ver-btn:hover {
+  transform: translateY(-1px);
+  background: var(--brass-light);
+}
+.ver-btn[aria-expanded="true"] {
+  background: var(--brass-light);
 }
 .leader {
   flex: 1;
