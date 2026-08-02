@@ -490,8 +490,8 @@ a {
   display: inline-flex;
   align-items: center;
   flex: none;
-  background: var(--brass);
-  color: #000;
+  background: var(--leather);
+  color: var(--cream);
   border: none;
   border-radius: 999px;
   padding: 3px 12px;
@@ -503,14 +503,17 @@ a {
   cursor: pointer;
   transition:
     transform 0.15s ease,
-    background 0.15s ease;
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .ver-btn:hover {
   transform: translateY(-1px);
   background: var(--brass-light);
+  color: #000;
 }
 .ver-btn[aria-expanded="true"] {
   background: var(--brass-light);
+  color: #000;
 }
 .leader {
   flex: 1;
